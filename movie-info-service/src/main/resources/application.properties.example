@@ -1,0 +1,10 @@
+spring.application.name=movie-info-service
+server.port=8082
+
+# MovieDB API Key
+api.key=your_api_key_here
+
+# MongoDB
+spring.data.mongodb.host=localhost
+spring.data.mongodb.port=27017
+spring.data.mongodb.database=moviedb
