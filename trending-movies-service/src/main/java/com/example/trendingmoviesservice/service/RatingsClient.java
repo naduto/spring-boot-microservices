@@ -14,17 +14,18 @@ public class RatingsClient {
 
     private final RestTemplate restTemplate;
 
-    @Value("${ratings.service.url:http://localhost:8081}")
+    @Value("${ratings.service.url:http://localhost:8083}")
     private String ratingsServiceUrl;
 
     public RatingsClient(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    @Cacheable(value = "allRatings", unless = "#result == null || #result.isEmpty()")
+//    @Cacheable(value = "allRatings", unless = "#result == null || #result.isEmpty()")
     public List<Rating> getAllRatings() {
         String url = ratingsServiceUrl + "/ratings/all";
         Rating[] ratings = restTemplate.getForObject(url, Rating[].class);
+        System.out.println(ratings.length);
         return ratings != null ? Arrays.asList(ratings) : List.of();
     }
 }

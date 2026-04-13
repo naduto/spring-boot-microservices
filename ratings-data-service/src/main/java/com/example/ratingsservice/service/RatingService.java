@@ -17,4 +17,9 @@ public class RatingService {
         List<Rating> ratings = ratingRepository.findByUserId(userId);
         return new UserRating(ratings);
     }
+    public List<Rating> getAllRatings(){
+        List<Rating> ratings= ratingRepository.findAll();
+        System.out.println(ratings.size());
+        return ratings;
+    }
 }

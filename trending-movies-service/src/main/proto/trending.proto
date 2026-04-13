@@ -1,23 +1,23 @@
-syntax = "proto3";
+  syntax = "proto3";
 
-option java_multiple_files = true;
-option java_package = "com.example.grpc.trending";
-package trending;
+  option java_multiple_files = true;
+  option java_package = "com.example.grpc.trending";
+  package trending;
 
-service TrendingService {
-  rpc GetTopTrending (TrendingRequest) returns (TrendingResponse);
-}
+  service TrendingService {
+    rpc GetTopTrending (TrendingRequest) returns (TrendingResponse);
+  }
 
-message TrendingRequest {
-  int32 limit = 1;
-}
+  message TrendingRequest {
+    int32 limit = 1;
+  }
 
-message MovieRatingInfo {
-  string movieId = 1;
-  double averageRating = 2;
-  string movieName = 3;
-}
+  message MovieRatingInfo {
+    string movieId = 1;
+    double averageRating = 2;
+    string movieName = 3;
+  }
 
-message TrendingResponse {
-  repeated MovieRatingInfo movies = 1;
-}
+  message TrendingResponse {
+    repeated MovieRatingInfo movies = 1;
+  }
