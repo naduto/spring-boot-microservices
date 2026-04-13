@@ -1,10 +1,10 @@
-package com.example.movieinfoservice;
+package org.example.trendingmoviesservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MovieInfoServiceApplicationTests {
+class TrendingMoviesServiceApplicationTests {
 
     @Test
     void contextLoads() {
