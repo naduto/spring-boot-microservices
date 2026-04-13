@@ -1,4 +1,4 @@
-package com.example.movieinfoservice.entity;
+package com.example.movieinfoservice.dto;
 
 public class MovieSummary {
     private String id;
