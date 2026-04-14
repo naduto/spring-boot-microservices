@@ -1,10 +1,11 @@
 package com.moviecatalogservice.services;
 
+import com.example.grpc.trending.*;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
-import com.example.grpc.trending.*;
 
 import java.util.List;
+
 @Service
 public class MovieCatalogClient {
 
@@ -28,4 +29,3 @@ public class MovieCatalogClient {
         }
     }
 }
-
