@@ -25,7 +25,7 @@ public class RatingsClient {
     public List<Rating> getAllRatings() {
         String url = ratingsServiceUrl + "/ratings/all";
         Rating[] ratings = restTemplate.getForObject(url, Rating[].class);
-        System.out.println(ratings.length);
+//        System.out.println(ratings.length);
         return ratings != null ? Arrays.asList(ratings) : List.of();
     }
 }

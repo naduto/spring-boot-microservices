@@ -1,0 +1,8 @@
+server:
+  port: 8081
+
+grpc:
+  client:
+    trending-movies-service:
+      address: dns:///localhost:9090
+      negotiationType: PLAINTEXT
