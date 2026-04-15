@@ -2,6 +2,7 @@ package com.example.ratingsservice.controller;
 
 import com.example.ratingsservice.dto.UserRating;
 import com.example.ratingsservice.entity.Rating;
+import com.example.ratingsservice.repository.MovieAverageProjection;
 import com.example.ratingsservice.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,5 +22,9 @@ public class RatingsController {
     @RequestMapping("/{userId}")
     public UserRating getRatingsOfUser(@PathVariable String userId) {
         return ratingService.getUserRatings(userId); 
+    }
+    @GetMapping("/top/{n}")
+    public List<MovieAverageProjection> getTopRatedMovies(@PathVariable int n) {
+        return ratingService.getTopRatedMovies(n);
     }
 }

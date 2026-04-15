@@ -2,8 +2,10 @@ package com.example.ratingsservice.service;
 
 import com.example.ratingsservice.entity.Rating;
 import com.example.ratingsservice.dto.UserRating;
+import com.example.ratingsservice.repository.MovieAverageProjection;
 import com.example.ratingsservice.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -19,7 +21,10 @@ public class RatingService {
     }
     public List<Rating> getAllRatings(){
         List<Rating> ratings= ratingRepository.findAll();
-        System.out.println(ratings.size());
+
         return ratings;
+    }
+    public List<MovieAverageProjection> getTopRatedMovies(int topN) {
+        return ratingRepository.findTopNMoviesByAverageRating(PageRequest.of(0, topN));
     }
 }

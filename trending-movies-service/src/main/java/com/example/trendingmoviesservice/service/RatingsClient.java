@@ -1,5 +1,6 @@
 package com.example.trendingmoviesservice.service;
 
+import com.example.trendingmoviesservice.dto.MovieAverage;
 import com.example.trendingmoviesservice.dto.Rating;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -27,5 +28,10 @@ public class RatingsClient {
         Rating[] ratings = restTemplate.getForObject(url, Rating[].class);
 //        System.out.println(ratings.length);
         return ratings != null ? Arrays.asList(ratings) : List.of();
+    }
+    public List<MovieAverage> getTopRatedMovies(int topN) {
+        String url = ratingsServiceUrl + "/ratings/top/" + topN;
+        MovieAverage[] results = restTemplate.getForObject(url, MovieAverage[].class);
+        return results != null ? Arrays.asList(results) : List.of();
     }
 }
