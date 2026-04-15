@@ -33,6 +33,15 @@ services:
       timeout: 5s
       retries: 5
 
+  redis:
+    image: redis:latest
+    container_name: redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # ─── Discovery Server (must start first) ───────────────────
 
   discovery-server:
@@ -87,6 +96,8 @@ services:
       - "8084:8084"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
+      RATINGS_SERVICE_URL: http://ratings-data-service:8083
+      MOVIE_INFO_SERVICE_URL: http://movie-info-service:8082
     depends_on:
       discovery-server:
         condition: service_healthy
@@ -102,6 +113,8 @@ services:
       - "8081:8081"
     environment:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8761/eureka
+      SPRING_REDIS_HOST: redis
+      SPRING_APPLICATION_JSON: '{"grpc.client.trending-movies-service.address":"dns:///trending-movies-service:9090"}'
     depends_on:
       discovery-server:
         condition: service_healthy
