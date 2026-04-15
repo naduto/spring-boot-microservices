@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.moviecatalogservice.services.catalogService;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,20 +20,14 @@ public class CatalogController {
 
     private static final Logger logger = LoggerFactory.getLogger(CatalogController.class);
 
-    private final MovieCatalogClient movieCatalogClient;
+    private final catalogService catalogService;
 
-    public CatalogController(MovieCatalogClient movieCatalogClient) {
-        this.movieCatalogClient = movieCatalogClient;
+    public CatalogController(catalogService catalogService) {
+        this.catalogService = catalogService;
     }
 
     @GetMapping("/trending/{limit}")
     public List<MovieCatalogItem> getTrending(@PathVariable int limit) {
-
-            List<MovieRatingInfo> grpcMovies = movieCatalogClient.getTopTrendingMovies(limit);
-
-            return grpcMovies.stream()
-                    .map(m -> new MovieCatalogItem(m.getMovieId(), m.getMovieName(), m.getAverageRating()))
-                    .collect(Collectors.toList());
-
+        return catalogService.getTrending(limit);
     }
 }

@@ -2,6 +2,7 @@ package com.moviecatalogservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -14,16 +15,16 @@ import org.springframework.web.client.RestTemplate;
 @EnableEurekaClient
 @EnableCircuitBreaker
 @EnableHystrixDashboard
-
+@EnableCaching
 public class MovieCatalogServiceApplication {
 
-    private final int TIMEOUT = 3000;   // 3 seconds
+    private final int TIMEOUT = 3000; // 3 seconds
 
     @Bean
     @LoadBalanced
     public RestTemplate getRestTemplate() {
         HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory();
-        clientHttpRequestFactory.setConnectTimeout(TIMEOUT);   // Set the timeout to 3 seconds
+        clientHttpRequestFactory.setConnectTimeout(TIMEOUT); // Set the timeout to 3 seconds
 
         return new RestTemplate(clientHttpRequestFactory);
     }
